@@ -36,14 +36,42 @@ C:\Users\YourName\Documents\2024\Projects\Finance\Reports\report.pdf
 * 📦 **Any File Type** - PDFs, images, videos, code, documents
 * 🎯 **Smart App Selection**
 * 🔍 **Fuzzy Search** - Handles typos
-* 🌍 **Cross Platform**
+* 🌍 **Cross Platform** - Windows, macOS, Linux
 * 💾 **One Time Setup**
 * 🎨 **Beautiful CLI**
 * 📱 **Minimal Dependencies**
 
 ---
 
+## 🌍 Cross-Platform Support
+
+QuickOpen works on **Windows**, **macOS**, and **Linux**. The tool automatically detects your operating system and uses appropriate commands.
+
+### Requirements by Platform
+
+**Windows:**
+- Node.js 14+
+- No additional setup needed
+
+**macOS:**
+- Node.js 14+
+- VS Code (optional, for code file opening) - ensure `code` command is in PATH
+
+**Linux:**
+- Node.js 14+
+- VS Code (optional, for code file opening) - ensure `code` command is in PATH
+- `xdg-open` utility (usually pre-installed)
+
+### Platform-Specific Behavior
+
+- **File Opening**: Uses native system commands (`start` on Windows, `open` on macOS, `xdg-open` on Linux)
+- **VS Code Integration**: Assumes VS Code is installed and `code` is available in PATH
+- **File Scanning**: Works across all platforms using cross-platform libraries
+
+---
+
 ## 📊 Quick Stats
+
 
 | Metric           | Value            |
 | ---------------- | ---------------- |
@@ -197,6 +225,48 @@ npm run rescan
 ```bash
 chmod +x bin/open.js
 ```
+
+**VS Code not opening files (macOS/Linux)**
+
+Ensure VS Code is installed and `code` command is in your PATH:
+
+```bash
+# Check if code command exists
+which code
+
+# If not found, add VS Code to PATH or create symlink
+# macOS: Usually /Applications/Visual Studio Code.app/Contents/Resources/app/bin
+# Linux: Usually /usr/bin or /snap/bin
+```
+
+**File opening fails**
+
+- **Windows**: Ensure default apps are associated with file types
+- **macOS**: Check if `open` command works: `open test.txt`
+- **Linux**: Check if `xdg-open` works: `xdg-open test.txt`
+
+**Large file systems**
+
+Scanning may take longer on systems with many files. The cache is saved locally and reused for fast searches.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+
+- Development setup
+- Coding standards
+- Testing guidelines
+- Submitting pull requests
+
+---
+
+<div align="center">
+
+Made with ❤️ for developers who value their time.
+
+</div>
 
 ---
 
