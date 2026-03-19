@@ -8,7 +8,6 @@ describe('fileScanner.scan', () => {
     const fakeFiles = ['/fake/path/a.txt', '/fake/path/b.txt'];
 
     jest.doMock('fast-glob', () => jest.fn(() => Promise.resolve(fakeFiles)));
-    jest.doMock('os', () => ({ homedir: () => '/home/user' }));
     const saveCacheSpy = jest.fn();
     jest.doMock('../src/utils/cache', () => ({ saveCache: saveCacheSpy }));
     const logSpy = { info: jest.fn(), success: jest.fn(), error: jest.fn() };
@@ -25,7 +24,6 @@ describe('fileScanner.scan', () => {
 
   test('logs error when no files are found and does not throw', async () => {
     jest.doMock('fast-glob', () => jest.fn(() => Promise.resolve([])));
-    jest.doMock('os', () => ({ homedir: () => '/home/user' }));
     const saveCacheSpy = jest.fn();
     jest.doMock('../src/utils/cache', () => ({ saveCache: saveCacheSpy }));
     const logSpy = { info: jest.fn(), error: jest.fn(), success: jest.fn() };
@@ -42,7 +40,6 @@ describe('fileScanner.scan', () => {
 
   test('calls process.exit on error', async () => {
     jest.doMock('fast-glob', () => jest.fn(() => Promise.reject(new Error('boom'))));
-    jest.doMock('os', () => ({ homedir: () => '/home/user' }));
     const logSpy = { info: jest.fn(), error: jest.fn(), success: jest.fn() };
     jest.doMock('../src/utils/logger', () => logSpy);
 

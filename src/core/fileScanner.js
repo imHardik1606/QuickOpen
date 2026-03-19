@@ -7,15 +7,13 @@ const logger = require('../utils/logger');
 /**
  * Scan entire file system for files
  */
-async function scan() {
-  const home = os.homedir();
-
+async function scan(scanDir = process.cwd()) {
   logger.info('🔍 Scanning files...');
-  logger.info(`📂 Location: ${home}\n`);
+  logger.info(`📂 Location: ${scanDir}\n`);
 
   try {
     const files = await fg(
-      [`${home.replace(/\\/g, '/')}/**/*`],
+      [`${scanDir.replace(/\\/g, '/')}/**/*`],
       {
         onlyFiles: true,
         suppressErrors: true,

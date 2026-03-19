@@ -19,7 +19,7 @@ if (!command) {
 switch (command) {
   case 'scan':
   case 'rescan':
-    commands.scan();
+    commands.scan(args.slice(1));
     break;
 
   case 'cache-info':

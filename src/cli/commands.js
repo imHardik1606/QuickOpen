@@ -5,9 +5,10 @@ const { openFile, getFileType } = require('../core/fileOpener');
 const { getCacheInfo, clearCache: clearCacheUtil } = require('../utils/cache');
 const logger = require('../utils/logger');
 
-async function handleScan() {
+async function handleScan(scanArgs = []) {
   try {
-    await scan();
+    const scanDir = scanArgs[0] || process.cwd();
+    await scan(scanDir);
   } catch (error) {
     logger.error(`Failed to scan: ${error.message}`);
     process.exit(1);
