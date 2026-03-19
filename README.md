@@ -22,7 +22,7 @@ Open any file on your computer in seconds directly from your terminal.
 You have a file buried somewhere like:
 
 ```
-C:\Users\YourName\Documents\2024\Projects\Finance\Reports\report.pdf
+C:\Users\[YourName]\Documents\2024\Projects\Finance\Reports\report.pdf
 ```
 
 ### ❌ Traditional Way
