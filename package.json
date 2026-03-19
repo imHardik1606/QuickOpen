@@ -1,5 +1,5 @@
 {
-  "name": "quickopen",
+  "name": "QuickOpen",
   "version": "1.0.0",
   "description": "⚡ Open any file by typing its name. Smart, fast, cross-platform CLI tool - 270K+ files in <100ms",
   "main": "bin/open.js",
@@ -47,14 +47,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imHardik1606/quickopen.git",
+    "url": "https://github.com/imHardik1606/QuickOpen.git",
     "directory": "."
   },
   "bugs": {
-    "url": "https://github.com/imHardik1606/quickopen/issues",
+    "url": "https://github.com/imHardik1606/QuickOpen/issues",
     "email": "your.email@example.com"
   },
-  "homepage": "https://github.com/imHardik1606/quickopen#readme",
+  "homepage": "https://github.com/imHardik1606/QuickOpen#readme",
   "engines": {
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
@@ -93,17 +93,17 @@
   },
   "badges": [
     {
-      "url": "https://img.shields.io/npm/v/quickopen.svg",
+      "url": "https://img.shields.io/npm/v/QuickOpen.svg",
       "alt": "npm version",
       "description": "Current npm package version."
     },
     {
-      "url": "https://img.shields.io/npm/l/quickopen.svg",
+      "url": "https://img.shields.io/npm/l/QuickOpen.svg",
       "alt": "License",
       "description": "MIT License"
     },
     {
-      "url": "https://img.shields.io/node/v/quickopen.svg",
+      "url": "https://img.shields.io/node/v/QuickOpen.svg",
       "alt": "Node.js",
       "description": "Node.js 14+"
     }
