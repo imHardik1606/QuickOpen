@@ -55,8 +55,6 @@ async function openInVSCode(filePath) {
       ? ['/c', 'code', '--new-window', directory, filePath]
       : ['--new-window', directory, filePath];
 
-    console.log(`Running: ${cmd} ${args.map(a => JSON.stringify(a)).join(' ')}`);
-
     const child = spawn(cmd, args, {
       detached: true,
       stdio: 'ignore'
@@ -88,8 +86,6 @@ async function openWithDefault(filePath) {
       } else {
         command = `xdg-open "${filePath}"`;
       }
-
-      console.log(`Running: ${command}`);
 
       exec(command, (error, stdout, stderr) => {
         if (error) {

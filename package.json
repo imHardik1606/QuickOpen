@@ -70,9 +70,10 @@
     "arm64"
   ],
   "dependencies": {
-    "inquirer": "^8.2.5",
+    "chalk": "^4.1.2",
     "fast-glob": "^3.3.1",
-    "fuse.js": "^7.0.0"
+    "fuse.js": "^7.0.0",
+    "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "jest": "^29.0.0"

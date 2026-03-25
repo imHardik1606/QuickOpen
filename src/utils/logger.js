@@ -1,9 +1,11 @@
+const chalk = require('chalk');
+
 const logger = {
-  info: (msg) => console.log(`ℹ️  ${msg}`),
-  success: (msg) => console.log(`✅ ${msg}`),
-  error: (msg) => console.error(`❌ ${msg}`),
-  warn: (msg) => console.log(`⚠️  ${msg}`),
-  opened: (file) => console.log(`\n📂 Opened: ${file}\n`),
+  info: (msg) => console.log(chalk.blue(`ℹ️  ${msg}`)),
+  success: (msg) => console.log(chalk.green(`✅ ${msg}`)),
+  error: (msg) => console.error(chalk.red(`❌ ${msg}`)),
+  warn: (msg) => console.log(chalk.yellow(`⚠️  ${msg}`)),
+  opened: (file) => console.log(chalk.cyan(`\n📂 Opened: ${file}\n`)),
 
   help: () => {
     console.log(`
