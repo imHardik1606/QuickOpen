@@ -3,11 +3,13 @@ const { scan } = require('../core/fileScanner');
 const { search } = require('../core/fileSearch');
 const { openFile, getFileType } = require('../core/fileOpener');
 const { getCacheInfo, clearCache: clearCacheUtil } = require('../utils/cache');
+const ignoreConfig = require('../utils/ignoreConfig');
+const rootConfig = require('../utils/rootConfig');
 const logger = require('../utils/logger');
 
 async function handleScan(scanArgs = []) {
   try {
-    const scanDir = scanArgs[0] || process.cwd();
+    const scanDir = scanArgs[0] || rootConfig.getRoot() || process.cwd();
     await scan(scanDir);
   } catch (error) {
     logger.error(`Failed to scan: ${error.message}`);
@@ -45,6 +47,108 @@ async function handleClearCache() {
   if (answer.confirmed) {
     clearCacheUtil();
     logger.success('Cache cleared. Run "open scan" to rebuild.');
+  }
+}
+
+async function handleIgnoreAdd(args) {
+  const folderPath = args[0];
+
+  if (!folderPath) {
+    logger.error('Usage: open ignore add <folderPath>');
+    logger.info('Example: open ignore add Downloads');
+    return;
+  }
+
+  try {
+    const result = ignoreConfig.addFolder(folderPath);
+    if (result.success) {
+      logger.success(result.message);
+      logger.info('Run "open rescan" to update the cache with new ignore settings.');
+    } else {
+      logger.warn(result.message);
+    }
+  } catch (error) {
+    logger.error(`Failed to add ignore folder: ${error.message}`);
+  }
+}
+
+async function handleIgnoreRemove(args) {
+  const folderPath = args[0];
+
+  if (!folderPath) {
+    logger.error('Usage: open ignore remove <folderPath>');
+    logger.info('Example: open ignore remove Downloads');
+    return;
+  }
+
+  try {
+    const result = ignoreConfig.removeFolder(folderPath);
+    if (result.success) {
+      logger.success(result.message);
+      logger.info('Run "open rescan" to update the cache with new ignore settings.');
+    } else {
+      logger.warn(result.message);
+    }
+  } catch (error) {
+    logger.error(`Failed to remove ignore folder: ${error.message}`);
+  }
+}
+
+function handleIgnoreList() {
+  try {
+    const folders = ignoreConfig.listFolders();
+
+    if (folders.length === 0) {
+      logger.info('No custom ignore folders configured.');
+      logger.info('Use "open ignore add <folderPath>" to add folders to ignore.');
+      return;
+    }
+
+    console.log('\n📁 Ignored Folders:');
+    folders.forEach((folder, index) => {
+      console.log(`  ${index + 1}. ${folder}`);
+    });
+    console.log('');
+  } catch (error) {
+    logger.error(`Failed to list ignore folders: ${error.message}`);
+  }
+}
+
+async function handleSetRoot(args) {
+  const rootPath = args[0];
+
+  if (!rootPath) {
+    logger.error('Usage: open set-root <path>');
+    logger.info('Example: open set-root C:\\Users\\YourName\\Projects');
+    return;
+  }
+
+  try {
+    const result = rootConfig.setRoot(rootPath);
+    if (result.success) {
+      logger.success(result.message);
+      logger.info('Run "open scan" to scan from the new root path.');
+    } else {
+      logger.error(result.message);
+    }
+  } catch (error) {
+    logger.error(`Failed to set root path: ${error.message}`);
+  }
+}
+
+function handleGetRoot() {
+  try {
+    const rootPath = rootConfig.getRoot();
+    const isCustom = rootConfig.isCustomRootSet();
+
+    if (isCustom) {
+      console.log(`\n📂 Custom Root Path: ${rootPath}\n`);
+    } else {
+      console.log(`\n📂 Default Root Path: ${rootPath} (home directory)\n`);
+      logger.info('Use "open set-root <path>" to set a custom scanning root.');
+    }
+  } catch (error) {
+    logger.error(`Failed to get root path: ${error.message}`);
   }
 }
 
@@ -96,6 +200,11 @@ const commands = {
   scan: handleScan,
   cacheInfo: handleCacheInfo,
   clearCache: handleClearCache,
+  ignoreAdd: handleIgnoreAdd,
+  ignoreRemove: handleIgnoreRemove,
+  ignoreList: handleIgnoreList,
+  setRoot: handleSetRoot,
+  getRoot: handleGetRoot,
   search: handleSearch
 };
 

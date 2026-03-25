@@ -16,6 +16,11 @@ USAGE:
   open rescan              Update file cache
   open cache-info          Show cache information
   open clear-cache         Clear cache
+  open set-root <path>     Set default scanning root path
+  open get-root            Show current root path
+  open ignore add <path>   Add folder to ignore list
+  open ignore remove <path> Remove folder from ignore list
+  open ignore list         Show ignored folders
   open help                Show this help
 
 EXAMPLES:
@@ -23,6 +28,11 @@ EXAMPLES:
   open app.js              Opens app.js in VS Code
   open src/app             Opens app file from src folder
   open data 2024           Finds files with both words
+  open set-root C:\\Users\\YourName\\Projects
+  open get-root
+  open ignore add Downloads
+  open ignore remove temp
+  open ignore list
 
 FEATURES:
   * Opens ANY file type (PDF, images, videos, documents, code)
@@ -31,6 +41,8 @@ FEATURES:
   * Fuzzy matching (typos don't matter)
   * One-time setup (scan once, use forever)
   * Cross-platform (Windows, macOS, Linux)
+  * Configurable root path (set default scanning directory)
+  * Custom ignore folders (persistent configuration)
     `);
   }
 };

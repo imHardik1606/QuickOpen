@@ -59,6 +59,8 @@ open report.pdf
 * 💾 **Persistent Cache** — no repeated scanning
 * 🎨 **Interactive CLI** — clean and intuitive experience
 * 📦 **Minimal Dependencies** — fast and lightweight
+* 🚫 **Custom Ignore Folders** — exclude folders from scanning
+* 🏠 **Configurable Root Path** — set default scanning directory
 
 ---
 
@@ -143,8 +145,63 @@ open scan         # First time scan
 open rescan       # Update cache
 open cache-info   # View stats
 open clear-cache  # Reset cache
+open set-root     # Set default root path
+open get-root     # Show root path
 open help         # Help menu
 ```
+
+### Ignore Folder Management
+
+Control which folders are excluded during scanning:
+
+```bash
+open ignore add <folderPath>     # Add folder to ignore list
+open ignore remove <folderPath>  # Remove folder from ignore list
+open ignore list                 # Show all ignored folders
+```
+
+**Examples:**
+
+```bash
+open ignore add Downloads        # Ignore Downloads folder
+open ignore add temp             # Ignore temp folder
+open ignore add .git             # Ignore .git folder
+open ignore list                 # View ignored folders
+open ignore remove temp          # Stop ignoring temp folder
+```
+
+**Notes:**
+- Configuration persists between runs (stored in `~/.smart-file-opener/ignore-config.json`)
+- Changes take effect on next scan/rescan
+- Prevents duplicate entries automatically
+- Built-in system folders (node_modules, .git, etc.) are always ignored
+
+---
+
+### Root Path Configuration
+
+Set a default scanning root directory for cross-platform compatibility:
+
+```bash
+open set-root <path>    # Set default scanning root path
+open get-root          # Show current root path
+```
+
+**Examples:**
+
+```bash
+open set-root C:\Users\YourName\Projects    # Windows
+open set-root /home/username/projects       # Linux/Mac
+open get-root                              # View current setting
+open scan                                  # Scans from configured root
+```
+
+**Notes:**
+- Configuration persists between runs (stored in `~/.smart-file-opener/root-config.json`)
+- By default, scanning uses your home directory (`C:\Users\[username]` on Windows, `/Users/[username]` on Mac, `/home/[username]` on Linux)
+- Use `set-root` to customize the scanning root to a specific directory
+- Explicit scan path overrides configured root: `open scan /other/path`
+- Root path must exist and be a directory
 
 ---
 
@@ -172,23 +229,38 @@ No extra setup required.
 
 ---
 
-<!-- ## ⚙️ Configuration
+## ⚙️ Configuration
 
-Customize behavior in:
+### Built-in Settings
 
-```
-src/utils/config.js
-```
-
-Example:
+Default configuration in `src/utils/config.js`:
 
 ```js
 const config = {
-  ignoreFolders: ['**/node_modules/**'],
-  fuzzyThreshold: 0.3,
-  maxResults: 15
+  ignoreFolders: [
+    '**/node_modules/**',    // NPM packages
+    '**/venv/**',           // Python virtual envs
+    '**/AppData/**',        // Windows app data
+    // ... and many more
+  ],
+  fuzzyThreshold: 0.3,      // Search sensitivity
+  maxResults: 15           // Max search results
 };
-``` -->
+```
+
+### Custom Ignore Folders
+
+User-defined ignore folders are stored in:
+```
+~/.smart-file-opener/ignore-config.json
+```
+
+Manage with commands:
+```bash
+open ignore add Downloads
+open ignore remove temp
+open ignore list
+```
 
 ---
 
