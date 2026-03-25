@@ -49,8 +49,11 @@ function isCodeFile(filePath) {
 async function openInVSCode(filePath) {
   return new Promise((resolve, reject) => {
     const isWindows = process.platform === 'win32';
+    const directory = path.dirname(filePath);
     const cmd = isWindows ? 'cmd' : 'code';
-    const args = isWindows ? ['/c', 'code', filePath] : [filePath];
+    const args = isWindows
+      ? ['/c', 'code', '--new-window', directory, filePath]
+      : ['--new-window', directory, filePath];
 
     console.log(`Running: ${cmd} ${args.map(a => JSON.stringify(a)).join(' ')}`);
 

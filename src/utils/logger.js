@@ -25,7 +25,7 @@ USAGE:
 
 EXAMPLES:
   open report              Opens report.pdf, report.docx, etc.
-  open app.js              Opens app.js in VS Code
+  open app.js              Opens app.js in new VS Code window with folder
   open src/app             Opens app file from src folder
   open data 2024           Finds files with both words
   open set-root C:\\Users\\YourName\\Projects
@@ -36,7 +36,7 @@ EXAMPLES:
 
 FEATURES:
   * Opens ANY file type (PDF, images, videos, documents, code)
-  * Smart app selection (right app for each file)
+  * Smart app selection (right app for each file, code files open in new VS Code window with folder)
   * Instant search (less than 100ms)
   * Fuzzy matching (typos don't matter)
   * One-time setup (scan once, use forever)

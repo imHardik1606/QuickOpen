@@ -27,7 +27,7 @@ describe('fileOpener', () => {
 
     await openInVSCode('C:/test/file.txt');
 
-    expect(child_process.spawn).toHaveBeenCalledWith('cmd', ['/c', 'code', 'C:/test/file.txt'], expect.any(Object));
+    expect(child_process.spawn).toHaveBeenCalledWith('cmd', ['/c', 'code', '--new-window', 'C:/test', 'C:/test/file.txt'], expect.any(Object));
 
     Object.defineProperty(process, 'platform', { value: originalPlatform });
   });

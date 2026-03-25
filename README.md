@@ -54,7 +54,7 @@ open report.pdf
 * 🚀 **Lightning Fast Search** — Scan once, search in milliseconds
 * 📂 **Works with Any File Type** — documents, media, code, archives
 * 🔍 **Fuzzy Search** — even if you mistype filenames
-* 🧠 **Smart File Opening** — automatically chooses best app
+* 🧠 **Smart File Opening** — automatically chooses best app (code files open in new VS Code window with folder)
 * 🌍 **Cross Platform** — Windows, macOS, Linux
 * 💾 **Persistent Cache** — no repeated scanning
 * 🎨 **Interactive CLI** — clean and intuitive experience
@@ -211,7 +211,7 @@ open scan                                  # Scans from configured root
 open budget.xlsx      # Opens in Excel
 open photo.jpg        # Opens in image viewer
 open video.mp4        # Opens in media player
-open app.js           # Opens in VS Code
+open app.js           # Opens in new VS Code window with folder
 open reprt            # Finds report.pdf
 ```
 
