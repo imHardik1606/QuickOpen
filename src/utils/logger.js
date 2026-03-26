@@ -1,11 +1,11 @@
 const chalk = require('chalk');
 
 const logger = {
-  info: (msg) => console.log(chalk.blue(`ℹ️  ${msg}`)),
-  success: (msg) => console.log(chalk.green(`✅ ${msg}`)),
-  error: (msg) => console.error(chalk.red(`❌ ${msg}`)),
-  warn: (msg) => console.log(chalk.yellow(`⚠️  ${msg}`)),
-  opened: (file) => console.log(chalk.cyan(`\n📂 Opened: ${file}\n`)),
+  info: (msg) => console.log(chalk.blue(`Info: ${msg}`)),
+  success: (msg) => console.log(chalk.green(`Success: ${msg}`)),
+  error: (msg) => console.error(chalk.red(`Error: ${msg}`)),
+  warn: (msg) => console.log(chalk.yellow(`Warning: ${msg}`)),
+  opened: (file) => console.log(chalk.cyan(`\nOpened: ${file}\n`)),
 
   help: () => {
     console.log(`
@@ -14,6 +14,7 @@ Smart File Opener - Universal File Tool
 USAGE:
   open <filename>          Open a file by name
   open <folder>/<file>     Open file from specific folder
+  open folder <folderName> Open a folder in VS Code
   open scan                Scan your computer (first time)
   open rescan              Update file cache
   open cache-info          Show cache information

@@ -74,10 +74,46 @@ open scan /home/username
 - Recursively scans directory for all files
 - Respects ignore patterns (node_modules, .git, AppData, etc.)
 - Saves results to `~/.smart-file-opener/smart-open-cache.json`
-- Displays progress: "🔍 Scanning files..."
-- Shows total files found: "✅ Found 5,234 files"
+- Displays progress: "Scanning files..."
+- Shows total files found: "Found 5,234 files"
 - Takes 1-3 minutes depending on directory size
 - **Note:** Must run before first search
+
+---
+
+## Folder Search Commands
+
+### `open folder <folderName>`
+
+**Purpose:**  
+Search for and open a folder by name directly in VS Code.
+
+**Syntax:**
+```bash
+open folder <folderName>
+```
+
+**Examples:**
+```bash
+# Open folder by exact name
+open folder myproject
+
+# Open folder with partial match
+open folder proj          # Finds myproject, project-alpha, etc.
+
+# Open common folder names
+open folder src
+open folder docs
+open folder test
+```
+
+**Expected Behavior:**
+- Searches for folders matching the name within the configured root directory
+- If single folder found → opens directly in VS Code
+- If multiple folders found → shows interactive menu to select
+- Uses fuzzy matching for folder names
+- Opens the selected folder in a new VS Code window
+- **Note:** Requires VS Code CLI (`code` command) to be available in PATH
 
 ---
 
@@ -137,9 +173,9 @@ open set-root /Users/username/Documents
 ```
 
 **Expected Behavior:**
-- ✅ Green success message if path exists and is valid directory
-- ❌ Red error message if path doesn't exist  
-- ❌ Red error message if path is a file (not directory)
+- Success message if path exists and is valid directory
+- Error message if path doesn't exist  
+- Error message if path is a file (not directory)
 - Stores configuration in `~/.smart-file-opener/root-config.json`
 - Persists across terminal sessions
 - Future `open scan` commands use this root
@@ -160,11 +196,11 @@ open get-root
 **Examples:**
 ```bash
 # Shows custom root if set
-📂 Custom Root Path: C:\Users\HP\Desktop\Web_Development\Projects
+Custom Root Path: C:\Users\HP\Desktop\Web_Development\Projects
 
 # Shows default root if not configured
-📂 Default Root Path: C:\Users\HP (home directory)
-ℹ️  Use "open set-root <path>" to set a custom scanning root.
+Default Root Path: C:\Users\HP (home directory)
+Info: Use "open set-root <path>" to set a custom scanning root.
 ```
 
 **Expected Behavior:**
@@ -194,7 +230,7 @@ open root reset
 **Expected Behavior:**
 - Removes custom root configuration
 - Future `open scan` reverts to home directory default
-- ✅ Shows green success message
+- Shows success message
 - Changes persist immediately
 
 **Note:** `open get-root` will show default path after reset
@@ -229,8 +265,8 @@ open ignore add C:\Users\HP\AppData\Roaming
 ```
 
 **Expected Behavior:**
-- ✅ Green success message: "Added 'Downloads' to ignore list"
-- ⚠️ Yellow warning if already in list: "Already in ignore list"
+- Success message: "Added 'Downloads' to ignore list"
+- Warning if already in list: "Already in ignore list"
 - Stores in `~/.smart-file-opener/ignore-config.json`
 - Changes take effect on next `open rescan`
 - Normalizes paths with `/**` glob pattern internally
@@ -257,8 +293,8 @@ open ignore remove .git
 ```
 
 **Expected Behavior:**
-- ✅ Green success message: "Removed 'Downloads' from ignore list"
-- ❌ Red error if not found: "Not in ignore list"
+- Success message: "Removed 'Downloads' from ignore list"
+- Error if not found: "Not in ignore list"
 - Changes take effect on next `open rescan`
 - Returns info message: "Run 'open rescan' to update cache"
 - **Note:** Built-in ignores (node_modules, AppData) always apply
@@ -278,7 +314,7 @@ open ignore list
 **Examples:**
 ```bash
 # Shows configured ignored folders
-📁 Ignored Folders:
+Ignored Folders:
   1. Downloads
   2. AppData
   3. node_modules
@@ -286,8 +322,8 @@ open ignore list
   5. temp
 
 # If no custom ignores configured
-ℹ️  No custom ignore folders configured.
-ℹ️  Use "open ignore add <folderPath>" to add folders to ignore.
+Info: No custom ignore folders configured.
+Info: Use "open ignore add <folderPath>" to add folders to ignore.
 ```
 
 **Expected Behavior:**

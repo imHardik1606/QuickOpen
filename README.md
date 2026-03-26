@@ -134,7 +134,28 @@ npm run scan
 open report.pdf
 open app.js
 open financial report 2024
+open folder myproject
 ```
+
+### Folder Commands
+
+Open folders directly in VS Code:
+
+```bash
+open folder <folderName>    # Open folder by name in VS Code
+```
+
+**Examples:**
+
+```bash
+open folder myproject       # Opens myproject folder in VS Code
+open folder src             # Opens src folder in VS Code
+```
+
+**Notes:**
+- Searches for folders within the configured root directory
+- If multiple folders match, shows an interactive menu to select
+- Opens the selected folder directly in VS Code
 
 ---
 

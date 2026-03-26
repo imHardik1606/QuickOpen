@@ -8,8 +8,8 @@ const logger = require('../utils/logger');
  * Scan entire file system for files
  */
 async function scan(scanDir = process.cwd()) {
-  logger.info('🔍 Scanning files...');
-  logger.info(`📂 Location: ${scanDir}\n`);
+  logger.info('Scanning files...');
+  logger.info(`Location: ${scanDir}\n`);
 
   try {
     const files = await fg(
@@ -27,11 +27,11 @@ async function scan(scanDir = process.cwd()) {
       return;
     }
 
-    logger.success(`\n✅ Found ${files.length.toLocaleString()} files`);
+    logger.success(`\nFound ${files.length.toLocaleString()} files`);
 
     // Save to cache
     saveCache(files);
-    logger.success('📊 Cache saved successfully\n');
+    logger.success('Cache saved successfully\n');
 
     return files;
   } catch (error) {

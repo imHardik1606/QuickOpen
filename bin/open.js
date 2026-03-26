@@ -38,6 +38,10 @@ switch (command) {
     commands.getRoot();
     break;
 
+  case 'folder':
+    commands.openFolder(args.slice(1));
+    break;
+
   case 'ignore':
     const subCommand = args[1];
     const ignoreArgs = args.slice(2);

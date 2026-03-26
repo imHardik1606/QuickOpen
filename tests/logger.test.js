@@ -18,7 +18,7 @@ describe('logger', () => {
     // Check that console.log was called with a message containing the icon and text
     expect(console.log).toHaveBeenCalled();
     const callArg = console.log.mock.calls[0][0];
-    expect(callArg).toContain('ℹ️');
+    expect(callArg).toContain('Info:');
     expect(callArg).toContain('hello');
   });
 
@@ -26,7 +26,7 @@ describe('logger', () => {
     logger.success('done');
     expect(console.log).toHaveBeenCalled();
     const callArg = console.log.mock.calls[0][0];
-    expect(callArg).toContain('✅');
+    expect(callArg).toContain('Success:');
     expect(callArg).toContain('done');
   });
 
@@ -34,7 +34,7 @@ describe('logger', () => {
     logger.error('fail');
     expect(console.error).toHaveBeenCalled();
     const callArg = console.error.mock.calls[0][0];
-    expect(callArg).toContain('❌');
+    expect(callArg).toContain('Error:');
     expect(callArg).toContain('fail');
   });
 
@@ -42,7 +42,7 @@ describe('logger', () => {
     logger.warn('caution');
     expect(console.log).toHaveBeenCalled();
     const callArg = console.log.mock.calls[0][0];
-    expect(callArg).toContain('⚠️');
+    expect(callArg).toContain('Warning:');
     expect(callArg).toContain('caution');
   });
 
@@ -50,7 +50,7 @@ describe('logger', () => {
     logger.opened('file.txt');
     expect(console.log).toHaveBeenCalled();
     const callArg = console.log.mock.calls[0][0];
-    expect(callArg).toContain('📂');
+    expect(callArg).toContain('Opened:');
     expect(callArg).toContain('file.txt');
   });
 });

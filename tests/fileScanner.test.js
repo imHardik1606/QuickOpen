@@ -19,7 +19,7 @@ describe('fileScanner.scan', () => {
 
     expect(result).toEqual(fakeFiles);
     expect(saveCacheSpy).toHaveBeenCalledWith(fakeFiles);
-    expect(logSpy.success).toHaveBeenCalledWith(expect.stringContaining('✅ Found'));
+    expect(logSpy.success).toHaveBeenCalledWith(expect.stringContaining('Found'));
   });
 
   test('logs error when no files are found and does not throw', async () => {

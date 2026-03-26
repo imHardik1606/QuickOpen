@@ -6,6 +6,8 @@ const { getCacheInfo, clearCache: clearCacheUtil } = require('../utils/cache');
 const ignoreConfig = require('../utils/ignoreConfig');
 const rootConfig = require('../utils/rootConfig');
 const logger = require('../utils/logger');
+const fg = require('fast-glob');
+const { exec } = require('child_process');
 
 async function handleScan(scanArgs = []) {
   try {
@@ -104,7 +106,7 @@ function handleIgnoreList() {
       return;
     }
 
-    console.log('\n📁 Ignored Folders:');
+    console.log('\nIgnored Folders:');
     folders.forEach((folder, index) => {
       console.log(`  ${index + 1}. ${folder}`);
     });
@@ -142,9 +144,9 @@ function handleGetRoot() {
     const isCustom = rootConfig.isCustomRootSet();
 
     if (isCustom) {
-      console.log(`\n📂 Custom Root Path: ${rootPath}\n`);
+      console.log(`\nCustom Root Path: ${rootPath}\n`);
     } else {
-      console.log(`\n📂 Default Root Path: ${rootPath} (home directory)\n`);
+      console.log(`\nDefault Root Path: ${rootPath} (home directory)\n`);
       logger.info('Use "open set-root <path>" to set a custom scanning root.');
     }
   } catch (error) {
@@ -196,6 +198,67 @@ function formatFileDisplay(filePath) {
   return `${filename}  ${dirname}`.substring(0, 100);
 }
 
+async function handleOpenFolder(args) {
+  const folderName = args[0];
+
+  if (!folderName) {
+    logger.error('Usage: open folder <folderName>');
+    logger.info('Example: open folder myproject');
+    return;
+  }
+
+  try {
+    const root = rootConfig.getRoot() || process.cwd();
+    const folders = await fg([`${root}/**/${folderName}`], {
+      onlyDirectories: true,
+      absolute: true,
+      suppressErrors: true
+    });
+
+    if (folders.length === 0) {
+      logger.error(`No folder named '${folderName}' found in ${root}`);
+      return;
+    }
+
+    if (folders.length === 1) {
+      exec(`code "${folders[0]}"`, (error) => {
+        if (error) {
+          logger.error(`Failed to open folder: ${error.message}`);
+        } else {
+          logger.success(`Opened folder: ${folders[0]}`);
+        }
+      });
+      return;
+    }
+
+    // Multiple folders - show menu
+    const choices = folders.map(folder => ({
+      name: folder,
+      value: folder
+    }));
+
+    const answer = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'selectedFolder',
+        message: `Found ${folders.length} folder(s). Select:`,
+        choices: choices,
+        pageSize: 12
+      }
+    ]);
+
+    exec(`code "${answer.selectedFolder}"`, (error) => {
+      if (error) {
+        logger.error(`Failed to open folder: ${error.message}`);
+      } else {
+        logger.success(`Opened folder: ${answer.selectedFolder}`);
+      }
+    });
+  } catch (error) {
+    logger.error(`Error: ${error.message}`);
+  }
+}
+
 const commands = {
   scan: handleScan,
   cacheInfo: handleCacheInfo,
@@ -205,7 +268,8 @@ const commands = {
   ignoreList: handleIgnoreList,
   setRoot: handleSetRoot,
   getRoot: handleGetRoot,
-  search: handleSearch
+  search: handleSearch,
+  openFolder: handleOpenFolder
 };
 
 module.exports = commands;
