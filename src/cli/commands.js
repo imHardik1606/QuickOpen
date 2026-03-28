@@ -6,8 +6,11 @@ const { getCacheInfo, clearCache: clearCacheUtil } = require('../utils/cache');
 const ignoreConfig = require('../utils/ignoreConfig');
 const rootConfig = require('../utils/rootConfig');
 const logger = require('../utils/logger');
+const config = require('../utils/config');
 const fg = require('fast-glob');
 const { exec } = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
 async function handleScan(scanArgs = []) {
   try {
@@ -199,7 +202,7 @@ function formatFileDisplay(filePath) {
 }
 
 async function handleOpenFolder(args) {
-  const folderName = args[0];
+  const folderName = args.join(' ').trim();
 
   if (!folderName) {
     logger.error('Usage: open folder <folderName>');
@@ -208,11 +211,26 @@ async function handleOpenFolder(args) {
   }
 
   try {
-    const root = rootConfig.getRoot() || process.cwd();
-    const folders = await fg([`${root}/**/${folderName}`], {
+    // If user provided a direct path, open it immediately.
+    const resolvedFolderPath = path.resolve(folderName);
+    if (fs.existsSync(resolvedFolderPath) && fs.statSync(resolvedFolderPath).isDirectory()) {
+      exec(`code "${resolvedFolderPath}"`, (error) => {
+        if (error) {
+          logger.error(`Failed to open folder: ${error.message}`);
+        } else {
+          logger.success(`Opened folder: ${resolvedFolderPath}`);
+        }
+      });
+      return;
+    }
+
+    const root = rootConfig.isCustomRootSet() ? rootConfig.getRoot() : process.cwd();
+    const searchRoot = root.replace(/\\/g, '/');
+    const folders = await fg([`${searchRoot}/**/${folderName}`], {
       onlyDirectories: true,
       absolute: true,
-      suppressErrors: true
+      suppressErrors: true,
+      ignore: config.ignoreFolders
     });
 
     if (folders.length === 0) {
