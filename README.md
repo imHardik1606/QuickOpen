@@ -2,7 +2,7 @@
 
 # ⚡ QuickOpen
 
-<img src="./assets/logo.png" alt="QuickOpen Logo" width="500" height="250"/>
+<img src="./assets/logo.png" alt="QuickOpen Logo" width="450" height="250"/>
 
 **Stop navigating folders. Start opening files instantly.**
 
@@ -69,7 +69,7 @@ open report.pdf
 ## 🎬 Demo
 
 <p align="center">
-  <img src="./assets/demo.gif" alt="QuickOpen Demo" width="600" />
+  <img src="./assets/demo.gif" alt="QuickOpen Demo" width="900" />
 </p>
 
 Example flow:
