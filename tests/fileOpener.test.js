@@ -15,7 +15,13 @@ describe('fileOpener', () => {
 
   test('openInVSCode calls spawn with correct args on Windows', async () => {
     jest.doMock('child_process', () => ({
-      spawn: jest.fn(() => ({ on: jest.fn(), unref: jest.fn() })),
+      spawn: jest.fn(() => ({
+        on: jest.fn((event, handler) => {
+          if (event === 'spawn') {
+            handler();
+          }
+        })
+      })),
       exec: jest.fn()
     }));
 
@@ -27,7 +33,11 @@ describe('fileOpener', () => {
 
     await openInVSCode('C:/test/file.txt');
 
-    expect(child_process.spawn).toHaveBeenCalledWith('cmd', ['/c', 'code', '--new-window', 'C:/test', 'C:/test/file.txt'], expect.any(Object));
+    expect(child_process.spawn).toHaveBeenCalledWith(
+      'cmd',
+      ['/c', 'code', '--new-window', 'C:/test', 'C:/test/file.txt'],
+      { stdio: 'ignore' }
+    );
 
     Object.defineProperty(process, 'platform', { value: originalPlatform });
   });

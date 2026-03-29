@@ -2,6 +2,8 @@
 
 # ⚡ QuickOpen
 
+<img src="./assets/logo.png" alt="QuickOpen Logo" width="500" height="250"/>
+
 **Stop navigating folders. Start opening files instantly.**
 
 Open any file on your computer in seconds directly from your terminal.
@@ -66,7 +68,9 @@ open report.pdf
 
 ## 🎬 Demo
 
-> *(Add a GIF here — this is important for real impact)*
+<p align="center">
+  <img src="./assets/demo.gif" alt="QuickOpen Demo" width="600" />
+</p>
 
 Example flow:
 

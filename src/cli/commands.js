@@ -12,10 +12,25 @@ const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 
+function formatDuration(ms) {
+  if (ms < 1000) {
+    return `${ms}ms`;
+  }
+
+  return `${(ms / 1000).toFixed(2)}s`;
+}
+
+function logDuration(action, startTime) {
+  logger.info(`${action} completed in ${formatDuration(Date.now() - startTime)}`);
+}
+
 async function handleScan(scanArgs = []) {
+  const startTime = Date.now();
+
   try {
     const scanDir = scanArgs[0] || rootConfig.getRoot() || process.cwd();
     await scan(scanDir);
+    logDuration('Scan', startTime);
   } catch (error) {
     logger.error(`Failed to scan: ${error.message}`);
     process.exit(1);
@@ -158,6 +173,8 @@ function handleGetRoot() {
 }
 
 async function handleSearch(query) {
+  const startTime = Date.now();
+
   try {
     const results = search(query);
 
@@ -166,6 +183,7 @@ async function handleSearch(query) {
       await openFile(results[0]);
       const type = getFileType(results[0]);
       logger.opened(`${results[0]} (${type})`);
+      logDuration('Open file', startTime);
       return;
     }
 
@@ -189,6 +207,7 @@ async function handleSearch(query) {
     await openFile(answer.selectedFile);
     const type = getFileType(answer.selectedFile);
     logger.opened(`${answer.selectedFile} (${type})`);
+    logDuration('Open file', startTime);
   } catch (error) {
     logger.error(`Error: ${error.message}`);
     process.exit(1);
@@ -202,6 +221,7 @@ function formatFileDisplay(filePath) {
 }
 
 async function handleOpenFolder(args) {
+  const startTime = Date.now();
   const folderName = args.join(' ').trim();
 
   if (!folderName) {
@@ -214,13 +234,19 @@ async function handleOpenFolder(args) {
     // If user provided a direct path, open it immediately.
     const resolvedFolderPath = path.resolve(folderName);
     if (fs.existsSync(resolvedFolderPath) && fs.statSync(resolvedFolderPath).isDirectory()) {
-      exec(`code "${resolvedFolderPath}"`, (error) => {
-        if (error) {
-          logger.error(`Failed to open folder: ${error.message}`);
-        } else {
-          logger.success(`Opened folder: ${resolvedFolderPath}`);
-        }
+      await new Promise((resolve, reject) => {
+        exec(`code "${resolvedFolderPath}"`, (error) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          resolve();
+        });
       });
+
+      logger.success(`Opened folder: ${resolvedFolderPath}`);
+      logDuration('Open folder', startTime);
       return;
     }
 
@@ -239,13 +265,19 @@ async function handleOpenFolder(args) {
     }
 
     if (folders.length === 1) {
-      exec(`code "${folders[0]}"`, (error) => {
-        if (error) {
-          logger.error(`Failed to open folder: ${error.message}`);
-        } else {
-          logger.success(`Opened folder: ${folders[0]}`);
-        }
+      await new Promise((resolve, reject) => {
+        exec(`code "${folders[0]}"`, (error) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          resolve();
+        });
       });
+
+      logger.success(`Opened folder: ${folders[0]}`);
+      logDuration('Open folder', startTime);
       return;
     }
 
@@ -265,13 +297,19 @@ async function handleOpenFolder(args) {
       }
     ]);
 
-    exec(`code "${answer.selectedFolder}"`, (error) => {
-      if (error) {
-        logger.error(`Failed to open folder: ${error.message}`);
-      } else {
-        logger.success(`Opened folder: ${answer.selectedFolder}`);
-      }
+    await new Promise((resolve, reject) => {
+      exec(`code "${answer.selectedFolder}"`, (error) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve();
+      });
     });
+
+    logger.success(`Opened folder: ${answer.selectedFolder}`);
+    logDuration('Open folder', startTime);
   } catch (error) {
     logger.error(`Error: ${error.message}`);
   }

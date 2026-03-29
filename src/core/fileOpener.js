@@ -56,7 +56,6 @@ async function openInVSCode(filePath) {
       : ['--new-window', directory, filePath];
 
     const child = spawn(cmd, args, {
-      detached: true,
       stdio: 'ignore'
     });
 
@@ -65,8 +64,9 @@ async function openInVSCode(filePath) {
       reject(error);
     });
 
-    child.unref();
-    resolve();
+    child.on('spawn', () => {
+      resolve();
+    });
   });
 }
 
