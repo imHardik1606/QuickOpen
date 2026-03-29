@@ -138,15 +138,15 @@ Cache File Size | Load Time | Analysis
 
 **Before:**
 ```bash
-open set-root C:\Users\YourName
-open scan
+qopen set-root C:\Users\YourName
+qopen scan
 # Scans entire home: 500K+ files → 300+ seconds
 ```
 
 **After:**
 ```bash
-open set-root C:\Users\YourName\Projects
-open scan
+qopen set-root C:\Users\YourName\Projects
+qopen scan
 # Scans only projects: 50K files → 30 seconds
 # 10x faster!
 ```
@@ -173,11 +173,11 @@ Scan entire C:\Users\YourName
 
 **Add more aggressive ignores for 80% reduction:**
 ```bash
-open ignore add Downloads              # Photos, installers
-open ignore add OneDrive              # Cloud sync
-open ignore add Documents             # Office documents
-open ignore add .git                  # Git history
-open rescan
+qopen ignore add Downloads              # Photos, installers
+qopen ignore add OneDrive              # Cloud sync
+qopen ignore add Documents             # Office documents
+qopen ignore add .git                  # Git history
+qopen rescan
 ```
 
 **Performance Impact:**
@@ -189,16 +189,16 @@ Result: 6x faster!
 
 **Recommended Ignore Strategy:**
 ```bash
-open ignore add Downloads
-open ignore add AppData
-open ignore add .vscode
-open ignore add .git
-open ignore add node_modules
-open ignore add dist
-open ignore add build
-open ignore add __pycache__
-open ignore add venv
-open rescan
+qopen ignore add Downloads
+qopen ignore add AppData
+qopen ignore add .vscode
+qopen ignore add .git
+qopen ignore add node_modules
+qopen ignore add dist
+qopen ignore add build
+qopen ignore add __pycache__
+qopen ignore add venv
+qopen rescan
 ```
 
 ---
@@ -209,25 +209,25 @@ Instead of rescanning everything, do targeted scans:
 
 ```bash
 # Full scan (once per week)
-open set-root C:\Users\YourName\Projects
-open scan
+qopen set-root C:\Users\YourName\Projects
+qopen scan
 
 # Quick rescans (daily)
-open rescan                            # 30 seconds
-open rescan                            # 30 seconds
+qopen rescan                            # 30 seconds
+qopen rescan                            # 30 seconds
 ```
 
 **Weekly Maintenance:**
 ```bash
 # When adding many files
-open rescan
+qopen rescan
 
 # When changing ignores
-open rescan
+qopen rescan
 
 # Full cleanup (monthly)
-open clear-cache
-open scan
+qopen clear-cache
+qopen scan
 ```
 
 ---
@@ -238,16 +238,16 @@ For developers with distinct workspaces:
 
 ```bash
 # Project A (morning)
-open set-root C:\Projects\ProjectA
-open scan
+qopen set-root C:\Projects\ProjectA
+qopen scan
 
 # Project B (afternoon)
-open set-root C:\Projects\ProjectB
-open rescan
+qopen set-root C:\Projects\ProjectB
+qopen rescan
 
 # Switch as needed
-open get-root           # Show current root
-open set-root ...       # Switch to different root
+qopen get-root           # Show current root
+qopen set-root ...       # Switch to different root
 ```
 
 **Advantage:** Each root has separate cache → no interference
@@ -265,22 +265,22 @@ open set-root ...       # Switch to different root
 
 **Problem:**
 ```bash
-open set-root C:\Users\YourName
-open scan
+qopen set-root C:\Users\YourName
+qopen scan
 # Takes 5+ minutes, very slow
 ```
 
 **Solution:**
 ```bash
 # Limit to active projects folder
-open set-root C:\Users\YourName\Projects
-open scan                    # 30 seconds instead of 5 minutes!
+qopen set-root C:\Users\YourName\Projects
+qopen scan                    # 30 seconds instead of 5 minutes!
 
 # Add aggressive ignores
-open ignore add Downloads
-open ignore add Documents
-open ignore add .vscode
-open rescan                  # 10 seconds
+qopen ignore add Downloads
+qopen ignore add Documents
+qopen ignore add .vscode
+qopen rescan                  # 10 seconds
 ```
 
 **Result:**
@@ -300,20 +300,20 @@ open rescan                  # 10 seconds
 
 **Problem:**
 ```bash
-open scan
+qopen scan
 # Scans 150K files → 90 seconds, slow, less relevant
 ```
 
 **Solution:**
 ```bash
 # Explicitly ignore node_modules (already in defaults)
-open ignore add dist
-open ignore add build
-open rescan
+qopen ignore add dist
+qopen ignore add build
+qopen rescan
 
 # If still slow, use symlink trick
-open set-root packages/
-open scan                    # Only scans packages dir
+qopen set-root packages/
+qopen scan                    # Only scans packages dir
 ```
 
 **Result:**
@@ -336,27 +336,27 @@ Network drives are 50-100x slower than SSD.
 **Solution:**
 ```bash
 # Set specific project folder on local SSD
-open set-root C:\LocalProjects\ActiveProject
-open scan
+qopen set-root C:\LocalProjects\ActiveProject
+qopen scan
 
 # Very aggressive ignore patterns
-open ignore add .git
-open ignore add node_modules
-open ignore add dist
-open ignore add __pycache__
-open ignore add venv
-open ignore add build
-open ignore add .next
-open ignore add AppData
-open rescan
+qopen ignore add .git
+qopen ignore add node_modules
+qopen ignore add dist
+qopen ignore add __pycache__
+qopen ignore add venv
+qopen ignore add build
+qopen ignore add .next
+qopen ignore add AppData
+qopen rescan
 
 # Result: 20K files → 5 second scan time
 ```
 
 **Alternative:** Exclude network drive entirely
 ```bash
-open set-root C:\LocalDev          # Only local SSD
-open scan
+qopen set-root C:\LocalDev          # Only local SSD
+qopen scan
 # Fast and responsive
 ```
 
@@ -367,21 +367,21 @@ open scan
 ### 1. Use Specific Root Paths
 ```bash
 ✅ GOOD
-open set-root C:\Users\YourName\Projects
-open scan
+qopen set-root C:\Users\YourName\Projects
+qopen scan
 
 ❌ BAD
-open set-root C:\Users\YourName
-open scan              # Scans everything including AppData
+qopen set-root C:\Users\YourName
+qopen scan              # Scans everything including AppData
 ```
 
 ### 2. Ignore Large Folders Upfront
 ```bash
 ✅ DO THIS
-open ignore add node_modules
-open ignore add dist
-open ignore add .git
-open rescan
+qopen ignore add node_modules
+qopen ignore add dist
+qopen ignore add .git
+qopen rescan
 
 ❌ NOT THIS
 # Don't scan everything, then complain about speed
@@ -391,16 +391,16 @@ open rescan
 ```bash
 ✅ GOOD
 # Scan once
-open scan
+qopen scan
 
 # Search many times without rescanning
-open app.js
-open config.json
-open main.py
+qopen app.js
+qopen config.json
+qopen main.py
 
 ✅ RESCAN WHEN
-open ignore add subfolder    # And then
-open rescan
+qopen ignore add subfolder    # And then
+qopen rescan
 
 ❌ DON'T DO
 # Rescan after every file change
@@ -418,15 +418,15 @@ Difference matters when searching frequently!
 ### 5. Monitor Cache Size
 ```bash
 # Check cache size
-open cache-info
+qopen cache-info
 
 # If cache > 30MB, consider narrower root path
-open set-root <smaller-folder>
-open scan
+qopen set-root <smaller-folder>
+qopen scan
 
 # Or add more ignores
-open ignore add large-folder
-open rescan
+qopen ignore add large-folder
+qopen rescan
 ```
 
 ---
@@ -437,30 +437,30 @@ open rescan
 
 **Diagnosis:**
 ```bash
-open get-root
+qopen get-root
 # If C:\Users\YourName → too broad!
 # If C:\Users\YourName\Projects → check folder size
 ```
 
 **Solution 1: Narrow root path**
 ```bash
-open set-root C:\Users\YourName\Projects\ActiveProject
-open scan
+qopen set-root C:\Users\YourName\Projects\ActiveProject
+qopen scan
 ```
 
 **Solution 2: Add ignores**
 ```bash
-open ignore add node_modules
-open ignore add dist
-open ignore add AppData
-open rescan
+qopen ignore add node_modules
+qopen ignore add dist
+qopen ignore add AppData
+qopen rescan
 ```
 
 **Solution 3: Use local SSD**
 ```bash
 # If on network drive, copy to local SSD
-open set-root E:\LocalCopy
-open scan
+qopen set-root E:\LocalCopy
+qopen scan
 ```
 
 ---
@@ -469,20 +469,20 @@ open scan
 
 **Diagnosis:**
 ```bash
-open cache-info
+qopen cache-info
 # Check cache size - if > 30MB, loading cache is slow
 ```
 
 **Solution:**
 ```bash
 # Rebuild with narrower scope
-open clear-cache
-open set-root C:\Projects\Active
-open scan
+qopen clear-cache
+qopen set-root C:\Projects\Active
+qopen scan
 
 # Or add aggressive ignores
-open ignore add large-dataset
-open rescan
+qopen ignore add large-dataset
+qopen rescan
 ```
 
 ---
@@ -495,17 +495,17 @@ Scanning too many irrelevant files.
 **Solution:**
 ```bash
 # Option 1: Narrow root
-open set-root C:\MyProjects
-open scan
+qopen set-root C:\MyProjects
+qopen scan
 
 # Option 2: Add ignores
-open ignore add Downloads
-open ignore add Archives
-open ignore add Backups
-open rescan
+qopen ignore add Downloads
+qopen ignore add Archives
+qopen ignore add Backups
+qopen rescan
 
 # Option 3: Clear and rebuild
-open clear-cache
+qopen clear-cache
 # Then set-root or add-ignore before scan
 ```
 
@@ -515,13 +515,13 @@ open clear-cache
 
 ```bash
 # Measure scan performance
-time open scan                # Note total time
+time qopen scan                # Note total time
 
 # Check cache
-open cache-info               # Note file count and size
+qopen cache-info               # Note file count and size
 
 # Measure search
-time open myquery             # Note search time (should be <200ms)
+time qopen myquery             # Note search time (should be <200ms)
 ```
 
 **Expected Times:**

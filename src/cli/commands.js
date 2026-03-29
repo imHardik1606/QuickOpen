@@ -41,7 +41,7 @@ function handleCacheInfo() {
   const info = getCacheInfo();
 
   if (!info) {
-    logger.error('Cache not found. Run: open scan');
+    logger.error('Cache not found. Run: qopen scan');
     return;
   }
 
@@ -59,14 +59,14 @@ async function handleClearCache() {
     {
       type: 'confirm',
       name: 'confirmed',
-      message: 'Clear cache? (You will need to run "open scan" again)',
+      message: 'Clear cache? (You will need to run "qopen scan" again)',
       default: false
     }
   ]);
 
   if (answer.confirmed) {
     clearCacheUtil();
-    logger.success('Cache cleared. Run "open scan" to rebuild.');
+    logger.success('Cache cleared. Run "qopen scan" to rebuild.');
   }
 }
 
@@ -74,8 +74,8 @@ async function handleIgnoreAdd(args) {
   const folderPath = args[0];
 
   if (!folderPath) {
-    logger.error('Usage: open ignore add <folderPath>');
-    logger.info('Example: open ignore add Downloads');
+    logger.error('Usage: qopen ignore add <folderPath>');
+    logger.info('Example: qopen ignore add Downloads');
     return;
   }
 
@@ -83,7 +83,7 @@ async function handleIgnoreAdd(args) {
     const result = ignoreConfig.addFolder(folderPath);
     if (result.success) {
       logger.success(result.message);
-      logger.info('Run "open rescan" to update the cache with new ignore settings.');
+      logger.info('Run "qopen rescan" to update the cache with new ignore settings.');
     } else {
       logger.warn(result.message);
     }
@@ -96,8 +96,8 @@ async function handleIgnoreRemove(args) {
   const folderPath = args[0];
 
   if (!folderPath) {
-    logger.error('Usage: open ignore remove <folderPath>');
-    logger.info('Example: open ignore remove Downloads');
+    logger.error('Usage: qopen ignore remove <folderPath>');
+    logger.info('Example: qopen ignore remove Downloads');
     return;
   }
 
@@ -105,7 +105,7 @@ async function handleIgnoreRemove(args) {
     const result = ignoreConfig.removeFolder(folderPath);
     if (result.success) {
       logger.success(result.message);
-      logger.info('Run "open rescan" to update the cache with new ignore settings.');
+      logger.info('Run "qopen rescan" to update the cache with new ignore settings.');
     } else {
       logger.warn(result.message);
     }
@@ -120,7 +120,7 @@ function handleIgnoreList() {
 
     if (folders.length === 0) {
       logger.info('No custom ignore folders configured.');
-      logger.info('Use "open ignore add <folderPath>" to add folders to ignore.');
+      logger.info('Use "qopen ignore add <folderPath>" to add folders to ignore.');
       return;
     }
 
@@ -138,8 +138,8 @@ async function handleSetRoot(args) {
   const rootPath = args[0];
 
   if (!rootPath) {
-    logger.error('Usage: open set-root <path>');
-    logger.info('Example: open set-root C:\\Users\\YourName\\Projects');
+    logger.error('Usage: qopen set-root <path>');
+    logger.info('Example: qopen set-root C:\\Users\\YourName\\Projects');
     return;
   }
 
@@ -147,7 +147,7 @@ async function handleSetRoot(args) {
     const result = rootConfig.setRoot(rootPath);
     if (result.success) {
       logger.success(result.message);
-      logger.info('Run "open scan" to scan from the new root path.');
+      logger.info('Run "qopen scan" to scan from the new root path.');
     } else {
       logger.error(result.message);
     }
@@ -165,7 +165,7 @@ function handleGetRoot() {
       console.log(`\nCustom Root Path: ${rootPath}\n`);
     } else {
       console.log(`\nDefault Root Path: ${rootPath} (home directory)\n`);
-      logger.info('Use "open set-root <path>" to set a custom scanning root.');
+      logger.info('Use "qopen set-root <path>" to set a custom scanning root.');
     }
   } catch (error) {
     logger.error(`Failed to get root path: ${error.message}`);
@@ -225,8 +225,8 @@ async function handleOpenFolder(args) {
   const folderName = args.join(' ').trim();
 
   if (!folderName) {
-    logger.error('Usage: open folder <folderName>');
-    logger.info('Example: open folder myproject');
+    logger.error('Usage: qopen folder <folderName>');
+    logger.info('Example: qopen folder myproject');
     return;
   }
 

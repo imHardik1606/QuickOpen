@@ -59,9 +59,9 @@ switch (command) {
       default:
         logger.error('Invalid ignore command. Use: add, remove, or list');
         logger.info('Examples:');
-        logger.info('  open ignore add Downloads');
-        logger.info('  open ignore remove Downloads');
-        logger.info('  open ignore list');
+        logger.info('  qopen ignore add Downloads');
+        logger.info('  qopen ignore remove Downloads');
+        logger.info('  qopen ignore list');
         process.exit(1);
     }
     break;

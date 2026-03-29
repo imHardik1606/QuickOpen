@@ -8,7 +8,7 @@
 
 Open any file on your computer in seconds directly from your terminal.
 
-[![npm version](https://badge.fury.io/js/quickopen.svg)](https://badge.fury.io/js/quickopen)
+[![npm version](https://badge.fury.io/js/quickopen-cli.svg)](https://badge.fury.io/js/quickopen-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-14%2B-green)](https://nodejs.org/)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](./tests)
@@ -34,7 +34,7 @@ Click → Folder → Folder → Folder → File → Open
 ### ✅ QuickOpen Way
 
 ```bash
-open report.pdf
+qopen report.pdf
 ```
 
 👉 That’s it. File opens instantly.
@@ -75,7 +75,7 @@ open report.pdf
 Example flow:
 
 ```bash
-open report
+qopen report
 
 ✔ Found 3 matches:
 1. report.pdf
@@ -105,15 +105,15 @@ Select file: 1
 ### ✅ Install from npm (Recommended)
 
 ```bash
-npm install -g quickopen
+npm install -g quickopen-cli
 ```
 
 Now use from anywhere:
 
 ```bash
-open report.pdf
-open app.js
-open photo.jpg
+qopen report.pdf
+qopen app.js
+qopen photo.jpg
 ```
 
 ---
@@ -135,10 +135,10 @@ npm run scan
 ### Basic Commands
 
 ```bash
-open report.pdf
-open app.js
-open financial report 2024
-open folder myproject
+qopen report.pdf
+qopen app.js
+qopen financial report 2024
+qopen folder myproject
 ```
 
 ### Folder Commands
@@ -146,14 +146,14 @@ open folder myproject
 Open folders directly in VS Code:
 
 ```bash
-open folder <folderName>    # Open folder by name in VS Code
+qopen folder <folderName>    # Open folder by name in VS Code
 ```
 
 **Examples:**
 
 ```bash
-open folder myproject       # Opens myproject folder in VS Code
-open folder src             # Opens src folder in VS Code
+qopen folder myproject       # Opens myproject folder in VS Code
+qopen folder src             # Opens src folder in VS Code
 ```
 
 **Notes:**
@@ -166,13 +166,13 @@ open folder src             # Opens src folder in VS Code
 ### System Commands
 
 ```bash
-open scan         # First time scan
-open rescan       # Update cache
-open cache-info   # View stats
-open clear-cache  # Reset cache
-open set-root     # Set default root path
-open get-root     # Show root path
-open help         # Help menu
+qopen scan         # First time scan
+qopen rescan       # Update cache
+qopen cache-info   # View stats
+qopen clear-cache  # Reset cache
+qopen set-root     # Set default root path
+qopen get-root     # Show root path
+qopen help         # Help menu
 ```
 
 ### Ignore Folder Management
@@ -180,19 +180,19 @@ open help         # Help menu
 Control which folders are excluded during scanning:
 
 ```bash
-open ignore add <folderPath>     # Add folder to ignore list
-open ignore remove <folderPath>  # Remove folder from ignore list
-open ignore list                 # Show all ignored folders
+qopen ignore add <folderPath>     # Add folder to ignore list
+qopen ignore remove <folderPath>  # Remove folder from ignore list
+qopen ignore list                 # Show all ignored folders
 ```
 
 **Examples:**
 
 ```bash
-open ignore add Downloads        # Ignore Downloads folder
-open ignore add temp             # Ignore temp folder
-open ignore add .git             # Ignore .git folder
-open ignore list                 # View ignored folders
-open ignore remove temp          # Stop ignoring temp folder
+qopen ignore add Downloads        # Ignore Downloads folder
+qopen ignore add temp             # Ignore temp folder
+qopen ignore add .git             # Ignore .git folder
+qopen ignore list                 # View ignored folders
+qopen ignore remove temp          # Stop ignoring temp folder
 ```
 
 **Notes:**
@@ -208,24 +208,24 @@ open ignore remove temp          # Stop ignoring temp folder
 Set a default scanning root directory for cross-platform compatibility:
 
 ```bash
-open set-root <path>    # Set default scanning root path
-open get-root          # Show current root path
+qopen set-root <path>    # Set default scanning root path
+qopen get-root          # Show current root path
 ```
 
 **Examples:**
 
 ```bash
-open set-root C:\Users\YourName\Projects    # Windows
-open set-root /home/username/projects       # Linux/Mac
-open get-root                              # View current setting
-open scan                                  # Scans from configured root
+qopen set-root C:\Users\YourName\Projects    # Windows
+qopen set-root /home/username/projects       # Linux/Mac
+qopen get-root                              # View current setting
+qopen scan                                  # Scans from configured root
 ```
 
 **Notes:**
 - Configuration persists between runs (stored in `~/.smart-file-opener/root-config.json`)
 - By default, scanning uses your home directory (`C:\Users\[username]` on Windows, `/Users/[username]` on Mac, `/home/[username]` on Linux)
 - Use `set-root` to customize the scanning root to a specific directory
-- Explicit scan path overrides configured root: `open scan /other/path`
+- Explicit scan path overrides configured root: `qopen scan /other/path`
 - Root path must exist and be a directory
 
 ---
@@ -233,11 +233,11 @@ open scan                                  # Scans from configured root
 ## 🧠 Real World Examples
 
 ```bash
-open budget.xlsx      # Opens in Excel
-open photo.jpg        # Opens in image viewer
-open video.mp4        # Opens in media player
-open app.js           # Opens in new VS Code window with folder
-open reprt            # Finds report.pdf
+qopen budget.xlsx      # Opens in Excel
+qopen photo.jpg        # Opens in image viewer
+qopen video.mp4        # Opens in media player
+qopen app.js           # Opens in new VS Code window with folder
+qopen reprt            # Finds report.pdf
 ```
 
 ---
@@ -282,9 +282,9 @@ User-defined ignore folders are stored in:
 
 Manage with commands:
 ```bash
-open ignore add Downloads
-open ignore remove temp
-open ignore list
+qopen ignore add Downloads
+qopen ignore remove temp
+qopen ignore list
 ```
 
 ---
@@ -374,7 +374,7 @@ If this saves you time:
 ## 🚀 Ready to save time?
 
 ```bash
-npm install -g quickopen
+npm install -g quickopen-cli
 ```
 
 **Stop searching. Start opening.**

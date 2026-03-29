@@ -135,11 +135,11 @@ function loadCache() {
 
 ### Cache Behavior
 
-- **Write:** After every `open scan` or `open rescan`
-- **Read:** Before every `open <filename>` search
+- **Write:** After every `qopen scan` or `qopen rescan`
+- **Read:** Before every `qopen <filename>` search
 - **Location:** `~/.smart-file-opener/smart-open-cache.json`
 - **Size:** 1-50 MB depending on file count (mostly file paths)
-- **Invalidation:** Manual via `open clear-cache` or overwrite on scan
+- **Invalidation:** Manual via `qopen clear-cache` or overwrite on scan
 
 ---
 
@@ -493,7 +493,7 @@ codeExtensions: [
 
 User-friendly via CLI:
 ```bash
-open ignore add my_folder
+qopen ignore add my_folder
 ```
 
 Or manual edit:

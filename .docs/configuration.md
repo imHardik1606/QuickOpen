@@ -45,14 +45,14 @@ or when using default:
 ```
 
 **Created By:**
-- Automatically created when you run `open set-root <path>`
+- Automatically created when you run `qopen set-root <path>`
 - Also created on first scan if doesn't exist
 
 **Managed By Commands:**
 ```bash
-open set-root <path>     # Set custom root
-open get-root           # View current root
-open root reset         # Reset to default (home directory)
+qopen set-root <path>     # Set custom root
+qopen get-root           # View current root
+qopen root reset         # Reset to default (home directory)
 ```
 
 **Default Behavior:**
@@ -85,14 +85,14 @@ Stores user-defined folder ignore patterns.
 ```
 
 **Created By:**
-- Automatically created when you run `open ignore add <path>`
+- Automatically created when you run `qopen ignore add <path>`
 - Also created on first scan if doesn't exist
 
 **Managed By Commands:**
 ```bash
-open ignore add <path>     # Add folder to ignore list
-open ignore remove <path>  # Remove folder from ignore list
-open ignore list          # View all ignored folders
+qopen ignore add <path>     # Add folder to ignore list
+qopen ignore remove <path>  # Remove folder from ignore list
+qopen ignore list          # View all ignored folders
 ```
 
 **Pattern Format:**
@@ -150,15 +150,15 @@ Cache of scanned files for fast searching.
 ```
 
 **Created By:**
-- First run of `open scan`
-- Updated with each `open scan` or `open rescan`
+- First run of `qopen scan`
+- Updated with each `qopen scan` or `qopen rescan`
 
 **Managed By Commands:**
 ```bash
-open scan              # Build/update cache
-open rescan           # Quick rescan
-open cache-info       # View statistics
-open clear-cache      # Delete cache
+qopen scan              # Build/update cache
+qopen rescan           # Quick rescan
+qopen cache-info       # View statistics
+qopen clear-cache      # Delete cache
 ```
 
 **Cache Statistics:**
@@ -201,25 +201,25 @@ open clear-cache      # Delete cache
 
 **Set Root Path:**
 ```bash
-open set-root C:\Users\YourName\Projects
+qopen set-root C:\Users\YourName\Projects
 ```
 
 **Add Ignore Folder:**
 ```bash
-open ignore add node_modules
-open ignore add dist
-open rescan
+qopen ignore add node_modules
+qopen ignore add dist
+qopen rescan
 ```
 
 **View Configuration:**
 ```bash
-open get-root
-open ignore list
+qopen get-root
+qopen ignore list
 ```
 
 **Reset to Defaults:**
 ```bash
-open root reset
+qopen root reset
 # Then manually delete ignore-config.json to reset ignores
 ```
 
@@ -248,7 +248,7 @@ You can manually edit the JSON files if needed:
 
 **After manual edits:**
 ```bash
-open rescan  # Reload configuration
+qopen rescan  # Reload configuration
 ```
 
 ---
@@ -260,12 +260,12 @@ open rescan  # Reload configuration
 **Setup:**
 ```bash
 # Project A
-open set-root C:\Projects\ProjectA
-open scan
+qopen set-root C:\Projects\ProjectA
+qopen scan
 
 # Project B (later)
-open set-root C:\Projects\ProjectB
-open rescan
+qopen set-root C:\Projects\ProjectB
+qopen rescan
 ```
 
 **Result:**  
@@ -277,11 +277,11 @@ Only files from current root are indexed. Switch roots anytime.
 
 **Setup:**
 ```bash
-open set-root C:\Users\YourName
-open ignore add AppData
-open ignore add Downloads
-open ignore add node_modules
-open rescan
+qopen set-root C:\Users\YourName
+qopen ignore add AppData
+qopen ignore add Downloads
+qopen ignore add node_modules
+qopen rescan
 ```
 
 **Effect:**  
@@ -294,22 +294,22 @@ Scans are 10-50% faster by excluding massive folders.
 **Setup:**
 ```bash
 # Set to active workspace
-open set-root ~/workspace/current-project
+qopen set-root ~/workspace/current-project
 
 # Ignore build artifacts
-open ignore add node_modules
-open ignore add dist
-open ignore add .next
-open ignore add __pycache__
+qopen ignore add node_modules
+qopen ignore add dist
+qopen ignore add .next
+qopen ignore add __pycache__
 
 # Initial scan
-open scan
+qopen scan
 ```
 
 **Daily Workflow:**
 ```bash
-open rescan              # Quick update (takes 30-60 seconds)
-open feature.js         # Open files instantly
+qopen rescan              # Quick update (takes 30-60 seconds)
+qopen feature.js         # Open files instantly
 ```
 
 ---
@@ -364,7 +364,7 @@ cp ~/backup/root-config.json ~/.smart-file-opener/
 rm -rf ~/.smart-file-opener
 
 # QuickOpen will create new defaults on next run
-open scan
+qopen scan
 ```
 
 ---
@@ -427,26 +427,26 @@ chmod u+w ~/.smart-file-opener/
 **Problem:** "Wrong root path being used"
 ```bash
 # Solution: Check current config
-open get-root
+qopen get-root
 
 # Reset if needed
-open root reset
-open set-root <correct-path>
+qopen root reset
+qopen set-root <correct-path>
 ```
 
 **Problem:** "Ignore patterns not working"
 ```bash
 # Solution: Always rescan after adding ignores
-open ignore add <folder>
-open rescan
+qopen ignore add <folder>
+qopen rescan
 
 # Verify ignores are applied
-open ignore list
+qopen ignore list
 ```
 
 **Problem:** "Cache seems outdated"
 ```bash
 # Solution: Clear and rebuild
-open clear-cache
-open scan
+qopen clear-cache
+qopen scan
 ```

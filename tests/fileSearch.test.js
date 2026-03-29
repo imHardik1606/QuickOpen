@@ -79,7 +79,7 @@ describe('fileSearch.search', () => {
     const { search } = require('../src/core/fileSearch');
 
     expect(() => search('app')).toThrow('exit');
-    expect(errorSpy).toHaveBeenCalledWith('Cache not found. Run: open scan');
+    expect(errorSpy).toHaveBeenCalledWith('Cache not found. Run: qopen scan');
     expect(exitSpy).toHaveBeenCalledWith(1);
   });
 

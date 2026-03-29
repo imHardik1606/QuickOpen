@@ -1,12 +1,10 @@
 {
-  "name": "QuickOpen",
+  "name": "quickopen-cli",
   "version": "1.0.0",
   "description": "⚡ Open any file by typing its name. Smart, fast, cross-platform CLI tool - 270K+ files in <100ms",
-  "main": "bin/open.js",
   "type": "commonjs",
   "bin": {
-    "open": "./bin/open.js",
-    "quickopen": "./bin/open.js"
+    "qopen": "./bin/open.js"
   },
   "scripts": {
     "start": "node bin/open.js",
@@ -26,18 +24,7 @@
     "productivity",
     "terminal",
     "cross-platform",
-    "dev-tools",
-    "developer-tools",
-    "unix",
-    "linux",
-    "windows",
-    "macos",
-    "open-files",
-    "instant-file-access",
-    "file-manager",
-    "navigation",
-    "workflow-optimization",
-    "time-saving"
+    "developer-tools"
   ],
   "author": {
     "name": "Hardik Gayner",
@@ -47,19 +34,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imHardik1606/QuickOpen.git",
-    "directory": "."
+    "url": "git+https://github.com/imHardik1606/QuickOpen.git"
   },
   "bugs": {
-    "url": "https://github.com/imHardik1606/QuickOpen/issues",
-    "email": "hardikgayner1606@gmail.com"
+    "url": "https://github.com/imHardik1606/QuickOpen/issues"
   },
   "homepage": "https://github.com/imHardik1606/QuickOpen#readme",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=14.0.0"
   },
-  "preferGlobal": true,
   "os": [
     "darwin",
     "linux",
@@ -85,28 +68,10 @@
     "bin",
     "src",
     "README.md",
-    "LICENSE",
-    ".npmignore"
+    "LICENSE"
   ],
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/imHardik1606"
-  },
-  "badges": [
-    {
-      "url": "https://img.shields.io/npm/v/QuickOpen.svg",
-      "alt": "npm version",
-      "description": "Current npm package version."
-    },
-    {
-      "url": "https://img.shields.io/npm/l/QuickOpen.svg",
-      "alt": "License",
-      "description": "MIT License"
-    },
-    {
-      "url": "https://img.shields.io/node/v/QuickOpen.svg",
-      "alt": "Node.js",
-      "description": "Node.js 14+"
-    }
-  ]
+  }
 }

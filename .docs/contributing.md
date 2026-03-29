@@ -283,7 +283,7 @@ test('search works', () => {
 
 ### Adding a New Feature
 
-**Example: Add a new command `open sort <query>`**
+**Example: Add a new command `qopen sort <query>`**
 
 1. **Implement the feature** in `src/core/`:
    ```javascript
@@ -570,7 +570,7 @@ Use appropriate template:
 Brief description of the bug
 
 ## Steps to Reproduce
-1. Run `open scan`
+1. Run `qopen scan`
 2. Search for `file.js`
 3. Bug occurs: ...
 
@@ -603,7 +603,7 @@ Why this feature is needed
 How it should work
 
 ## Example Usage
-open new-command
+qopen new-command
 ```
 
 ---

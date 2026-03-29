@@ -72,7 +72,7 @@ function search(query) {
 
   const files = loadCache();
   if (!files) {
-    logger.error('Cache not found. Run: open scan');
+    logger.error('Cache not found. Run: qopen scan');
     process.exit(1);
   }
 

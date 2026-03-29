@@ -12,30 +12,30 @@ const logger = {
 Smart File Opener - Universal File Tool
 
 USAGE:
-  open <filename>          Open a file by name
-  open <folder>/<file>     Open file from specific folder
-  open folder <folderName> Open a folder in VS Code
-  open scan                Scan your computer (first time)
-  open rescan              Update file cache
-  open cache-info          Show cache information
-  open clear-cache         Clear cache
-  open set-root <path>     Set default scanning root path
-  open get-root            Show current root path
-  open ignore add <path>   Add folder to ignore list
-  open ignore remove <path> Remove folder from ignore list
-  open ignore list         Show ignored folders
-  open help                Show this help
+  qopen <filename>          Open a file by name
+  qopen <folder>/<file>     Open file from specific folder
+  qopen folder <folderName> Open a folder in VS Code
+  qopen scan                Scan your computer (first time)
+  qopen rescan              Update file cache
+  qopen cache-info          Show cache information
+  qopen clear-cache         Clear cache
+  qopen set-root <path>     Set default scanning root path
+  qopen get-root            Show current root path
+  qopen ignore add <path>   Add folder to ignore list
+  qopen ignore remove <path> Remove folder from ignore list
+  qopen ignore list         Show ignored folders
+  qopen help                Show this help
 
 EXAMPLES:
-  open report              Opens report.pdf, report.docx, etc.
-  open app.js              Opens app.js in new VS Code window with folder
-  open src/app             Opens app file from src folder
-  open data 2024           Finds files with both words
-  open set-root C:\\Users\\YourName\\Projects
-  open get-root
-  open ignore add Downloads
-  open ignore remove temp
-  open ignore list
+  qopen report              Opens report.pdf, report.docx, etc.
+  qopen app.js              Opens app.js in new VS Code window with folder
+  qopen src/app             Opens app file from src folder
+  qopen data 2024           Finds files with both words
+  qopen set-root C:\\Users\\YourName\\Projects
+  qopen get-root
+  qopen ignore add Downloads
+  qopen ignore remove temp
+  qopen ignore list
 
 FEATURES:
   * Opens ANY file type (PDF, images, videos, documents, code)

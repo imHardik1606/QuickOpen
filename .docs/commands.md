@@ -6,31 +6,31 @@ Complete reference guide for all QuickOpen commands with syntax, examples, and e
 
 ## File Search Commands
 
-### `open <filename>`
+### `qopen <filename>`
 
 **Purpose:**  
 Search for and open a file by name from the cache.
 
 **Syntax:**
 ```bash
-open <filename>
-open <partial-name>
-open <folder>/<filename>
+qopen <filename>
+qopen <partial-name>
+qopen <folder>/<filename>
 ```
 
 **Examples:**
 ```bash
 # Search by exact filename
-open report.pdf
+qopen report.pdf
 
 # Search with partial match (fuzzy search)
-open reprt              # Finds report.pdf despite typo
+qopen reprt              # Finds report.pdf despite typo
 
 # Search in specific folder
-open src/app.js
+qopen src/app.js
 
 # Multi-word search
-open financial report 2024
+qopen financial report 2024
 ```
 
 **Expected Behavior:**
@@ -43,31 +43,31 @@ open financial report 2024
 
 ---
 
-### `open scan [directory]`
+### `qopen scan [directory]`
 
 **Purpose:**  
 Scan filesystem and build/update the cache of all files.
 
 **Syntax:**
 ```bash
-open scan                    # Scan from configured root (or home)
-open scan <directory>        # Scan from specific directory
-open scan .                  # Scan current directory
+qopen scan                    # Scan from configured root (or home)
+qopen scan <directory>        # Scan from specific directory
+qopen scan .                  # Scan current directory
 ```
 
 **Examples:**
 ```bash
 # Scan from default root path
-open scan
+qopen scan
 
 # Scan from specific directory
-open scan C:\Users\YourName\Projects
+qopen scan C:\Users\YourName\Projects
 
 # Scan current working directory
-open scan .
+qopen scan .
 
 # Scan Linux/Mac user home
-open scan /home/username
+qopen scan /home/username
 ```
 
 **Expected Behavior:**
@@ -83,28 +83,28 @@ open scan /home/username
 
 ## Folder Search Commands
 
-### `open folder <folderName>`
+### `qopen folder <folderName>`
 
 **Purpose:**  
 Search for and open a folder by name directly in VS Code.
 
 **Syntax:**
 ```bash
-open folder <folderName>
+qopen folder <folderName>
 ```
 
 **Examples:**
 ```bash
 # Open folder by exact name
-open folder myproject
+qopen folder myproject
 
 # Open folder with partial match
-open folder proj          # Finds myproject, project-alpha, etc.
+qopen folder proj          # Finds myproject, project-alpha, etc.
 
 # Open common folder names
-open folder src
-open folder docs
-open folder test
+qopen folder src
+qopen folder docs
+qopen folder test
 ```
 
 **Expected Behavior:**
@@ -117,28 +117,28 @@ open folder test
 
 ---
 
-### `open rescan [directory]`
+### `qopen rescan [directory]`
 
 **Purpose:**  
 Shorthand for rescanning and updating the cache.
 
 **Syntax:**
 ```bash
-open rescan                  # Rescan from configured root
-open rescan <directory>      # Rescan from specific directory
+qopen rescan                  # Rescan from configured root
+qopen rescan <directory>      # Rescan from specific directory
 ```
 
 **Examples:**
 ```bash
 # Update cache from current root
-open rescan
+qopen rescan
 
 # Rescan a specific project folder
-open rescan C:\Projects\MyApp
+qopen rescan C:\Projects\MyApp
 ```
 
 **Expected Behavior:**
-- Equivalent to `open scan` with same behavior
+- Equivalent to `qopen scan` with same behavior
 - Useful for updating cache after file changes
 - Displays same progress and results as scan
 - Overwrites previous cache
@@ -147,29 +147,29 @@ open rescan C:\Projects\MyApp
 
 ## Root Path Configuration Commands
 
-### `open set-root <path>`
+### `qopen set-root <path>`
 
 **Purpose:**  
 Set a default root directory for all future scans (persisted across sessions).
 
 **Syntax:**
 ```bash
-open set-root <path>
+qopen set-root <path>
 ```
 
 **Examples:**
 ```bash
 # Windows
-open set-root C:\Users\HP\Projects
-open set-root C:\Users\HP\Documents
+qopen set-root C:\Users\HP\Projects
+qopen set-root C:\Users\HP\Documents
 
 # Linux
-open set-root /home/username/projects
-open set-root /home/username/work
+qopen set-root /home/username/projects
+qopen set-root /home/username/work
 
 # macOS
-open set-root /Users/username/Projects
-open set-root /Users/username/Documents
+qopen set-root /Users/username/Projects
+qopen set-root /Users/username/Documents
 ```
 
 **Expected Behavior:**
@@ -178,19 +178,19 @@ open set-root /Users/username/Documents
 - Error message if path is a file (not directory)
 - Stores configuration in `~/.smart-file-opener/root-config.json`
 - Persists across terminal sessions
-- Future `open scan` commands use this root
-- Can be overridden by explicit `open scan <path>`
+- Future `qopen scan` commands use this root
+- Can be overridden by explicit `qopen scan <path>`
 
 ---
 
-### `open get-root`
+### `qopen get-root`
 
 **Purpose:**  
 Display the current scanning root path.
 
 **Syntax:**
 ```bash
-open get-root
+qopen get-root
 ```
 
 **Examples:**
@@ -200,7 +200,7 @@ Custom Root Path: C:\Users\HP\Desktop\Web_Development\Projects
 
 # Shows default root if not configured
 Default Root Path: C:\Users\HP (home directory)
-Info: Use "open set-root <path>" to set a custom scanning root.
+Info: Use "qopen set-root <path>" to set a custom scanning root.
 ```
 
 **Expected Behavior:**
@@ -211,104 +211,104 @@ Info: Use "open set-root <path>" to set a custom scanning root.
 
 ---
 
-### `open root reset`
+### `qopen root reset`
 
 **Purpose:**  
 Reset root path to default home directory (removes custom configuration).
 
 **Syntax:**
 ```bash
-open root reset
+qopen root reset
 ```
 
 **Examples:**
 ```bash
-open root reset
+qopen root reset
 # Result: Configuration cleared, scanning reverts to home directory
 ```
 
 **Expected Behavior:**
 - Removes custom root configuration
-- Future `open scan` reverts to home directory default
+- Future `qopen scan` reverts to home directory default
 - Shows success message
 - Changes persist immediately
 
-**Note:** `open get-root` will show default path after reset
+**Note:** `qopen get-root` will show default path after reset
 
 ---
 
 ## Ignore Folder Management Commands
 
-### `open ignore add <path>`
+### `qopen ignore add <path>`
 
 **Purpose:**  
 Add a folder to the ignore list (excluded from scans).
 
 **Syntax:**
 ```bash
-open ignore add <folderPath>
+qopen ignore add <folderPath>
 ```
 
 **Examples:**
 ```bash
 # Ignore by folder name
-open ignore add Downloads
-open ignore add node_modules
-open ignore add AppData
+qopen ignore add Downloads
+qopen ignore add node_modules
+qopen ignore add AppData
 
 # Ignore by relative path
-open ignore add .git
-open ignore add dist
+qopen ignore add .git
+qopen ignore add dist
 
 # Ignore by absolute path (if needed)
-open ignore add C:\Users\HP\AppData\Roaming
+qopen ignore add C:\Users\HP\AppData\Roaming
 ```
 
 **Expected Behavior:**
 - Success message: "Added 'Downloads' to ignore list"
 - Warning if already in list: "Already in ignore list"
 - Stores in `~/.smart-file-opener/ignore-config.json`
-- Changes take effect on next `open rescan`
+- Changes take effect on next `qopen rescan`
 - Normalizes paths with `/**` glob pattern internally
-- Returns info message: "Run 'open rescan' to update cache"
+- Returns info message: "Run 'qopen rescan' to update cache"
 
 ---
 
-### `open ignore remove <path>`
+### `qopen ignore remove <path>`
 
 **Purpose:**  
 Remove a folder from the ignore list (include in future scans).
 
 **Syntax:**
 ```bash
-open ignore remove <folderPath>
+qopen ignore remove <folderPath>
 ```
 
 **Examples:**
 ```bash
 # Remove from ignore list
-open ignore remove Downloads
-open ignore remove temp
-open ignore remove .git
+qopen ignore remove Downloads
+qopen ignore remove temp
+qopen ignore remove .git
 ```
 
 **Expected Behavior:**
 - Success message: "Removed 'Downloads' from ignore list"
 - Error if not found: "Not in ignore list"
-- Changes take effect on next `open rescan`
-- Returns info message: "Run 'open rescan' to update cache"
+- Changes take effect on next `qopen rescan`
+- Returns info message: "Run 'qopen rescan' to update cache"
 - **Note:** Built-in ignores (node_modules, AppData) always apply
 
 ---
 
-### `open ignore list`
+### `qopen ignore list`
 
 **Purpose:**  
 Display all custom ignored folders.
 
 **Syntax:**
 ```bash
-open ignore list
+qopen ignore list
 ```
 
 **Examples:**
@@ -323,7 +323,7 @@ Ignored Folders:
 
 # If no custom ignores configured
 Info: No custom ignore folders configured.
-Info: Use "open ignore add <folderPath>" to add folders to ignore.
+Info: Use "qopen ignore add <folderPath>" to add folders to ignore.
 ```
 
 **Expected Behavior:**
@@ -337,14 +337,14 @@ Info: Use "open ignore add <folderPath>" to add folders to ignore.
 
 ## System Commands
 
-### `open cache-info`
+### `qopen cache-info`
 
 **Purpose:**  
 Display statistics about the current cache.
 
 **Syntax:**
 ```bash
-open cache-info
+qopen cache-info
 ```
 
 **Examples:**
@@ -361,18 +361,18 @@ Cache Information:
 - Displays total indexed files
 - Shows cache file size
 - Shows last scan timestamp
-- ❌ Red error if cache not found: "Cache not found. Run: open scan"
+- ❌ Red error if cache not found: "Cache not found. Run: qopen scan"
 
 ---
 
-### `open clear-cache`
+### `qopen clear-cache`
 
 **Purpose:**  
 Delete the cache file (requires confirmation).
 
 **Syntax:**
 ```bash
-open clear-cache
+qopen clear-cache
 ```
 
 **Examples:**
@@ -380,28 +380,28 @@ open clear-cache
 # Prompts for confirmation
 ? Clear cache? (Y/n)
 # After confirmation
-✅ Cache cleared. Run "open scan" to rebuild.
+✅ Cache cleared. Run "qopen scan" to rebuild.
 ```
 
 **Expected Behavior:**
 - Shows confirmation prompt  
 - Only proceeds if user confirms (Y/n)
 - ✅ Green success message after deletion
-- User must run `open scan` to rebuild cache
+- User must run `qopen scan` to rebuild cache
 - **Warning:** Will lose all indexed files
 
 ---
 
-### `open help`
+### `qopen help`
 
 **Purpose:**  
 Display command reference and examples.
 
 **Syntax:**
 ```bash
-open help
-open -h
-open --help
+qopen help
+qopen -h
+qopen --help
 ```
 
 **Expected Behavior:**
@@ -427,38 +427,38 @@ open --help
 ### Performance
 ```bash
 # Set root to specific project folder for faster scans
-open set-root C:\Projects\ActiveProject
-open scan
+qopen set-root C:\Projects\ActiveProject
+qopen scan
 
 # Add large folders to ignore list
-open ignore add node_modules
-open ignore add dist
-open rescan
+qopen ignore add node_modules
+qopen ignore add dist
+qopen rescan
 ```
 
 ### Workflow
 ```bash
 # First time setup
-open set-root C:\Users\YourName\Projects
-open scan
+qopen set-root C:\Users\YourName\Projects
+qopen scan
 
 # Regular usage
-open filename.js
+qopen filename.js
 
 # Update after adding files
-open rescan
+qopen rescan
 ```
 
 ### Cross-Platform
 ```bash
 # Windows
-open set-root C:\Users\YourName\Projects
+qopen set-root C:\Users\YourName\Projects
 
 # Linux
-open set-root /home/username/projects
+qopen set-root /home/username/projects
 
 # macOS
-open set-root /Users/username/Projects
+qopen set-root /Users/username/Projects
 ```
 
 ---
@@ -468,26 +468,26 @@ open set-root /Users/username/Projects
 **"Cache not found"**
 ```bash
 # Solution: Run initial scan
-open scan
+qopen scan
 ```
 
 **"No results found"**
 ```bash
 # Solution: Rescan for new files
-open rescan
+qopen rescan
 ```
 
 **Too many results**
 ```bash
 # Solution: Make search more specific
-open filename.ext          # Instead of just "file"
-open folder/filename       # Include folder path
+qopen filename.ext          # Instead of just "file"
+qopen folder/filename       # Include folder path
 ```
 
 **Slow scanning**
 ```bash
 # Solution: Ignore large folders
-open ignore add node_modules
-open ignore add AppData
-open rescan
+qopen ignore add node_modules
+qopen ignore add AppData
+qopen rescan
 ```
