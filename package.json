@@ -1,7 +1,7 @@
 {
   "name": "@imhardik16/quickopen-cli",
   "version": "1.0.1",
-  "description": "⚡ Open any file by typing its name. Smart, fast, cross-platform CLI tool - 270K+ files in <100ms",
+  "description": "Open any file by typing its name. Smart, fast, cross-platform CLI tool - 270K+ files in <100ms",
   "type": "commonjs",
   "preferGlobal": true,
   "bin": {
